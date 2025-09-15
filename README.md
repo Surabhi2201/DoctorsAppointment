@@ -1,39 +1,39 @@
-# 🏥 Doctor Appointment Booking App
+ Doctor Appointment Booking App
 
 A full-stack web application that allows patients to book appointments with doctors seamlessly. Built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js), this project demonstrates the power of modern web technologies in solving real-world problems like healthcare scheduling.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🔐 **Authentication & Authorization**
+- **Authentication & Authorization**
   - User (Patient/Doctor/Admin) registration & login
   - JWT-based secure authentication
 
-- 👩‍⚕️ **Doctor Panel**
+- **Doctor Panel**
   - Apply for a doctor account
   - View and manage appointments
   - Update availability
 
-- 👤 **Patient Panel**
+- **Patient Panel**
   - Browse doctors by specialty
   - Book appointments with real-time validation
   - View booking history and appointment status
 
-- 🛠️ **Admin Dashboard**
+-  **Admin Dashboard**
   - Approve or reject doctor applications
   - View user and doctor lists
   - Block/unblock users
 
-- 📨 **Notification System**
+- **Notification System**
   - In-app alerts for new bookings, status changes, and approvals
 
-- 📅 **Calendar View**
+- **Calendar View**
   - Doctors and patients can view appointments in a calendar interface
 
 ---
 
-## 🧑‍💻 Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React.js** - Component-based UI
@@ -51,7 +51,7 @@ A full-stack web application that allows patients to book appointments with doct
 
 ---
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js (v18+)
