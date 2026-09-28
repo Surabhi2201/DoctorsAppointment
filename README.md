@@ -4,7 +4,7 @@
 [Visit MediCare Patient Website](https://medicare-frontend-phi.vercel.app/)
 
 ###  Admin Dashboard
-[Visit MediCare Admin Dashboard](https://mediacre-dashboard.vercel.app/login)
+[Visit MediCare Admin Dashboard](https://mediacre-dashboard.vercel.app/)
 
 ###  Backend API
 [View MediCare Backend](https://doctorsappointment-25zr.onrender.com)
