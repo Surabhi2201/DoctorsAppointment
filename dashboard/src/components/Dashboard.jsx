@@ -16,7 +16,7 @@ import {
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Context } from "../main";
-
+import api from "../services/api";
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [doctorCount, setDoctorCount] = useState(0);
@@ -29,12 +29,12 @@ const Dashboard = () => {
       try {
         const [appointmentsResponse, doctorsResponse] =
           await Promise.all([
-            axios.get(
-              "http://localhost:5000/api/v1/appointment/getall",
+            api.get(
+              "/api/v1/appointment/getall",
               { withCredentials: true }
             ),
-            axios.get(
-              "http://localhost:5000/api/v1/user/doctors",
+            api.get(
+              "/api/v1/user/doctors",
               { withCredentials: true }
             ),
           ]);
@@ -67,8 +67,8 @@ const Dashboard = () => {
     status
   ) => {
     try {
-      const { data } = await axios.put(
-        `http://localhost:5000/api/v1/appointment/update/${appointmentId}`,
+      const { data } = await api.put(
+        `/api/v1/appointment/update/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
