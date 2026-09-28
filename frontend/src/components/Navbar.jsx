@@ -1,67 +1,190 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  FiMenu,
+  FiX,
+  FiLogIn,
+  FiLogOut,
+  FiCalendar,
+} from "react-icons/fi";
 import { toast } from "react-toastify";
+
 import { Context } from "../main";
+import api from "../services/api";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
-  const handleLogout = async () => {
-    await axios
-      .get("http://localhost:5000/api/v1/user/patient/logout", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message);
-        setIsAuthenticated(false);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
-  };
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+  } = useContext(Context);
 
   const navigateTo = useNavigate();
+  const location = useLocation();
 
-  const goToLogin = () => {
-    navigateTo("/login");
+  const closeMenu = () => {
+    setShow(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      const { data } = await api.get(
+        "/api/v1/user/patient/logout",
+        {
+          withCredentials: true,
+        }
+      );
+
+      toast.success(data.message);
+
+      setIsAuthenticated(false);
+
+      navigateTo("/");
+
+      closeMenu();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          "Unable to logout."
+      );
+    }
+  };
+
+  const isActive = (path) =>
+    location.pathname === path;
+
   return (
-    <>
-      <nav className={"container"}>
-        <div className="logo">
-          <img src="/images/doctors5.png" alt="logo" className="logo-img" />
-        </div>
-        <div className={show ? "navLinks showmenu" : "navLinks"}>
-          <div className="links">
-            <Link to={"/"} onClick={() => setShow(!show)}>
+    <header className="site-header">
+
+      <nav className="navbar container">
+
+        {/* BRAND */}
+
+       <Link
+  to="/"
+  className="brand"
+  onClick={closeMenu}
+>
+  <img
+    src="/img1.png"
+    alt="MediCare"
+    className="brand-logo"
+  />
+</Link>
+
+        {/* NAVIGATION */}
+
+        <div
+          className={`nav-menu ${
+            show ? "nav-menu-open" : ""
+          }`}
+        >
+
+          <div className="nav-links">
+
+            <Link
+              to="/"
+              className={
+                isActive("/")
+                  ? "nav-link-active"
+                  : ""
+              }
+              onClick={closeMenu}
+            >
               Home
             </Link>
-            <Link to={"/appointment"} onClick={() => setShow(!show)}>
-              Appointment
+
+         <Link
+  to="/my-appointment"
+  className={
+    isActive("/my-appointment")
+      ? "nav-link-active"
+      : ""
+  }
+  onClick={closeMenu}
+>
+  Appointments
+</Link>
+
+            <Link
+              to="/about"
+              className={
+                isActive("/about")
+                  ? "nav-link-active"
+                  : ""
+              }
+              onClick={closeMenu}
+            >
+              About
             </Link>
-            <Link to={"/about"} onClick={() => setShow(!show)}>
-              About Us
-            </Link>
+ <Link
+    to="/contact"
+    className={isActive("/contact") ? "nav-link-active" : ""}
+    onClick={closeMenu}
+  >
+    Contact
+  </Link>
           </div>
-          {isAuthenticated ? (
-            <button className="logoutBtn btn" onClick={handleLogout}>
-              LOGOUT
-            </button>
-          ) : (
-            <button className="loginBtn btn" onClick={goToLogin}>
-              LOGIN
-            </button>
-          )}
+
+          {/* ACTIONS */}
+
+          <div className="nav-actions">
+
+            {isAuthenticated ? (
+              <button
+                type="button"
+                className="nav-login-btn"
+                onClick={handleLogout}
+              >
+                <FiLogOut />
+                Logout
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="nav-login-btn"
+                onClick={() => {
+                  navigateTo("/login");
+                  closeMenu();
+                }}
+              >
+                <FiLogIn />
+                Login
+              </button>
+            )}
+
+            <Link
+              to="/appointment"
+              className="nav-cta"
+              onClick={closeMenu}
+            >
+              <FiCalendar />
+              Book Appointment
+            </Link>
+
+          </div>
+
         </div>
-        <div className="hamburger" onClick={() => setShow(!show)}>
-          <GiHamburgerMenu />
-        </div>
+
+        {/* MOBILE BUTTON */}
+
+        <button
+          type="button"
+          className="mobile-menu-btn"
+          onClick={() => setShow(!show)}
+          aria-label={
+            show
+              ? "Close navigation"
+              : "Open navigation"
+          }
+        >
+          {show ? <FiX /> : <FiMenu />}
+        </button>
+
       </nav>
-    </>
+
+    </header>
   );
 };
 

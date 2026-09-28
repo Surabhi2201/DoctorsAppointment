@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaLocationArrow, FaPhone } from "react-icons/fa6";
+import {
+  FaLocationArrow,
+  FaPhone,
+} from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import {
+  FiCalendar,
+  FiArrowUpRight,
+} from "react-icons/fi";
 
 const Footer = () => {
   const hours = [
@@ -27,7 +34,7 @@ const Footer = () => {
     },
     {
       id: 5,
-      day: "Monday",
+      day: "Friday",
       time: "3:00 PM - 9:00 PM",
     },
     {
@@ -38,50 +45,128 @@ const Footer = () => {
   ];
 
   return (
-    <>
-      <footer className={"container"}>
-        <hr />
-        <div className="content">
-          <div>
-            <img src="/images/doctors5.png"  className="logo-img"/>
-          </div>
-          <div>
-            <h4>Quick Links</h4>
-            <ul>
-              <Link to={"/"}>Home</Link>
-              <Link to={"/appointment"}>Appointment</Link>
-              <Link to={"/about"}>About</Link>
-            </ul>
-          </div>
-          <div>
-            <h4>Hours</h4>
-            <ul>
-              {hours.map((element) => (
-                <li key={element.id}>
-                  <span>{element.day}</span>
-                  <span>{element.time}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Contact</h4>
-            <div>
-              <FaPhone />
-              <span>999-999-9999</span>
+    <footer className="medicare-footer">
+      <div className="medicare-footer-container">
+
+        {/* BRAND */}
+        <div className="footer-brand-section">
+          <Link to="/" className="footer-brand">
+            <div className="footer-brand-mark">
+              +
             </div>
+
             <div>
-              <MdEmail />
-              <span>healthcare@gmail.com</span>
+              <strong>MediCare</strong>
+              <span>Healthcare made simple</span>
             </div>
-            <div>
-              <FaLocationArrow />
-              <span>Pune, India</span>
-            </div>
+          </Link>
+
+          <p>
+            Making quality healthcare easier to access,
+            one appointment at a time.
+          </p>
+
+          <Link
+            to="/appointment"
+            className="footer-book-button"
+          >
+            <FiCalendar />
+            Book Appointment
+            <FiArrowUpRight />
+          </Link>
+        </div>
+
+        {/* QUICK LINKS */}
+        <div className="footer-column">
+          <h4>Quick Links</h4>
+
+          <nav className="footer-links">
+            <Link to="/">Home</Link>
+            <Link to="/appointment">
+              Appointments
+            </Link>
+            <Link to="/my-appointment">
+              My Appointments
+            </Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+        </div>
+
+        {/* HOURS */}
+        <div className="footer-column">
+          <h4>Hours</h4>
+
+          <div className="footer-hours">
+            {hours.map((element) => (
+              <div
+                className="footer-hour-row"
+                key={element.id}
+              >
+                <span>{element.day}</span>
+                <span>{element.time}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </footer>
-    </>
+
+        {/* CONTACT */}
+        <div className="footer-column">
+          <h4>Contact</h4>
+
+          <div className="footer-contact-list">
+
+            <div className="footer-contact-item">
+              <div className="footer-contact-icon">
+                <FaPhone />
+              </div>
+
+              <div>
+                <span>Phone</span>
+                <strong>+91 98765 43210</strong>
+              </div>
+            </div>
+
+            <div className="footer-contact-item">
+              <div className="footer-contact-icon">
+                <MdEmail />
+              </div>
+
+              <div>
+                <span>Email</span>
+                <strong>
+                  support@medicare.demo
+                </strong>
+              </div>
+            </div>
+
+            <div className="footer-contact-item">
+              <div className="footer-contact-icon">
+                <FaLocationArrow />
+              </div>
+
+              <div>
+                <span>Location</span>
+                <strong>
+                  Chennai, Tamil Nadu
+                </strong>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div className="medicare-footer-bottom">
+        <span>
+          © 2026 MediCare. All rights reserved.
+        </span>
+
+        <span>
+          Healthcare made simple.
+        </span>
+      </div>
+    </footer>
   );
 };
 

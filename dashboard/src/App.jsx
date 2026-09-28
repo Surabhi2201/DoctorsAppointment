@@ -1,36 +1,46 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
+
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import AddNewDoctor from "./components/AddNewDoctor";
 import Messages from "./components/Messages";
 import Doctors from "./components/Doctors";
+import AddNewAdmin from "./components/AddNewAdmin";
+import Sidebar from "./components/Sidebar";
+
 import { Context } from "./main";
-import axios from "axios";
+import api from "./services/api";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Sidebar from "./components/Sidebar";
-import AddNewAdmin from "./components/AddNewAdmin";
+
 import "./App.css";
 
 const App = () => {
-  const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
-    useContext(Context);
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    setAdmin,
+  } = useContext(Context);
+
+  // Controls sidebar collapsed/expanded state
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/user/admin/me",
+        const response = await api.get(
+          "/api/v1/user/admin/me",
           {
             withCredentials: true,
           }
         );
+
         setIsAuthenticated(true);
         setAdmin(response.data.user);
       } catch (error) {
@@ -38,22 +48,38 @@ const App = () => {
         setAdmin({});
       }
     };
+
     fetchUser();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, setAdmin, setIsAuthenticated]);
 
   return (
-    <Router>
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/doctor/addnew" element={<AddNewDoctor />} />
-        <Route path="/admin/addnew" element={<AddNewAdmin />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/doctors" element={<Doctors />} />
-      </Routes>
-      <ToastContainer position="top-center" />
-    </Router>
+  <Router>
+  <Sidebar
+    collapsed={sidebarCollapsed}
+    setCollapsed={setSidebarCollapsed}
+  />
+
+ <main
+  className={`admin-content ${
+    !isAuthenticated
+      ? "admin-content-public"
+      : sidebarCollapsed
+      ? "admin-content-collapsed"
+      : ""
+  }`}
+>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/doctor/addnew" element={<AddNewDoctor />} />
+      <Route path="/admin/addnew" element={<AddNewAdmin />} />
+      <Route path="/messages" element={<Messages />} />
+      <Route path="/doctors" element={<Doctors />} />
+    </Routes>
+  </main>
+
+  <ToastContainer position="top-center" />
+</Router>
   );
 };
 

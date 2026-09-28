@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../services/api";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -33,12 +33,9 @@ const AppointmentForm = () => {
   const [doctors, setDoctors] = useState([]);
   useEffect(() => {
     const fetchDoctors = async () => {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/v1/user/doctors",
-        { withCredentials: true }
-      );
+      const { data } = await api.get("/api/v1/user/doctors");
       setDoctors(data.doctors);
-      console.log(data.doctors);
+    //  console.log(data.doctors);
     };
     fetchDoctors();
   }, []);
@@ -46,9 +43,7 @@ const AppointmentForm = () => {
     e.preventDefault();
     try {
       const hasVisitedBool = Boolean(hasVisited);
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/appointment/post",
-        {
+      const { data } = await api.post("/api/v1/appointment/post", {
           firstName,
           lastName,
           email,

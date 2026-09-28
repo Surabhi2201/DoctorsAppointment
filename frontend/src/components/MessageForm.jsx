@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../services/api";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -12,12 +12,14 @@ const MessageForm = () => {
   const handleMessage = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post(
-          "http://localhost:5000/api/v1/message/send",
-          { firstName, lastName, email, phone, message },
-          {
-            withCredentials: true,
+      await api.post("/api/v1/message/send", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        message
+      }, {
+        withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }
         )

@@ -21,3 +21,23 @@ export const getAllMessages = catchAsyncErrors(async (req, res, next) => {
     messages,
   });
 });
+
+export const markMessageAsRead = catchAsyncErrors(
+  async (req, res, next) => {
+    const message = await Message.findByIdAndUpdate(
+      req.params.id,
+      { isRead: true },
+      { new: true }
+    );
+
+    if (!message) {
+      return next(new ErrorHandler("Message Not Found!", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Message marked as read.",
+      data: message,
+    });
+  }
+);

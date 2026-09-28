@@ -1,94 +1,130 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import {
+  FiArrowUpRight,
+  FiHeart,
+} from "react-icons/fi";
 
 const Departments = () => {
   const departmentsArray = [
     {
-      name: "Pediatrics",
-      imageUrl: "/departments/pedia.jpg",
-    },
-    {
-      name: "Orthopedics",
-      imageUrl: "/departments/ortho.jpg",
-    },
-    {
       name: "Cardiology",
+      description: "Heart & cardiovascular care",
       imageUrl: "/departments/cardio.jpg",
     },
     {
       name: "Neurology",
+      description: "Brain & nervous system care",
       imageUrl: "/departments/neuro.jpg",
     },
     {
-      name: "Oncology",
-      imageUrl: "/departments/onco.jpg",
+      name: "Pediatrics",
+      description: "Specialized care for children",
+      imageUrl: "/departments/pedia.jpg",
     },
     {
-      name: "Radiology",
-      imageUrl: "/departments/radio.jpg",
-    },
-    {
-      name: "Physical Therapy",
-      imageUrl: "/departments/therapy.jpg",
+      name: "Orthopedics",
+      description: "Bones, joints & mobility",
+      imageUrl: "/departments/ortho.jpg",
     },
     {
       name: "Dermatology",
+      description: "Skin & wellness care",
       imageUrl: "/departments/derma.jpg",
     },
     {
       name: "ENT",
+      description: "Ear, nose & throat care",
       imageUrl: "/departments/ent.jpg",
+    },
+    {
+      name: "Radiology",
+      description: "Advanced diagnostic imaging",
+      imageUrl: "/departments/radio.jpg",
+    },
+    {
+      name: "Oncology",
+      description: "Specialized cancer care",
+      imageUrl: "/departments/onco.jpg",
     },
   ];
 
   const responsive = {
-    extraLarge: {
-      breakpoint: { max: 3000, min: 1324 },
-      items: 4,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-    large: {
-      breakpoint: { max: 1324, min: 1005 },
+    desktop: {
+      breakpoint: { max: 3000, min: 1200 },
       items: 3,
-      slidesToSlide: 1, // optional, default to 1.
     },
-    medium: {
-      breakpoint: { max: 1005, min: 700 },
+    tablet: {
+      breakpoint: { max: 1200, min: 700 },
       items: 2,
-      slidesToSlide: 1, // optional, default to 1.
     },
-    small: {
+    mobile: {
       breakpoint: { max: 700, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
     },
   };
 
   return (
-    <>
-      <div className="container departments">
-        <h2>Departments</h2>
+    <section className="departments-section">
+      <div className="container">
+        <div className="section-heading">
+          <div>
+            <span className="section-label">
+              OUR SPECIALTIES
+            </span>
+
+            <h2>
+              Care for every stage
+              <span> of your health.</span>
+            </h2>
+          </div>
+
+          <p>
+            Explore our medical specialties and find the
+            right care for your needs.
+          </p>
+        </div>
+
         <Carousel
           responsive={responsive}
-          removeArrowOnDeviceType={[
-            // "superLargeDesktop",
-            // "desktop",
-            "tablet",
-            "mobile",
-          ]}
+          infinite
+          autoPlay
+          autoPlaySpeed={4000}
+          arrows
+          itemClass="department-slide"
         >
-          {departmentsArray.map((depart, index) => {
-            return (
-              <div key={index} className="card">
-                <div className="depart-name">{depart.name}</div>
-                <img src={depart.imageUrl} alt="Department" />
+          {departmentsArray.map((department) => (
+            <article
+              className="department-card"
+              key={department.name}
+            >
+              <img
+                src={department.imageUrl}
+                alt={department.name}
+              />
+
+              <div className="department-overlay"></div>
+
+              <div className="department-content">
+                <div className="department-icon">
+                  <FiHeart />
+                </div>
+
+                <div>
+                  <h3>{department.name}</h3>
+                  <p>{department.description}</p>
+                </div>
+
+                <button className="department-arrow">
+                  <FiArrowUpRight />
+                </button>
               </div>
-            );
-          })}
+            </article>
+          ))}
         </Carousel>
       </div>
-    </>
+    </section>
   );
 };
 

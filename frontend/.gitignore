@@ -1,39 +1,25 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
 # Dependencies
 **/node_modules/
 
-# Environment variables / secrets
+# Environment variables
 **/.env
 **/.env.*
-**/config.env
+backend/config/
 
 # Build files
 **/dist/
 **/dist-ssr/
 **/build/
 
-# Local files
-*.local
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Editor
+.vscode/
+.idea/
 
-# OS files
+# OS
 .DS_Store
-
-# Visual Studio
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
