@@ -1,12 +1,12 @@
-## 🌐 Live Demo
+##  Live Demo
 
-### 👩‍⚕️ Patient Website
+###  Patient Website
 [Visit MediCare Patient Website](https://medicare-frontend-phi.vercel.app/)
 
-### 🛡️ Admin Dashboard
+###  Admin Dashboard
 [Visit MediCare Admin Dashboard](https://mediacre-dashboard.vercel.app/login)
 
-### ⚙️ Backend API
+###  Backend API
 [View MediCare Backend](https://doctorsappointment-25zr.onrender.com)
 ## Doctor Appointment Booking App
 
