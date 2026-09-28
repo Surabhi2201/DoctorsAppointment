@@ -1,3 +1,13 @@
+## 🌐 Live Demo
+
+### 👩‍⚕️ Patient Website
+[Visit MediCare Patient Website](https://medicare-frontend-phi.vercel.app/)
+
+### 🛡️ Admin Dashboard
+[Visit MediCare Admin Dashboard](https://mediacre-dashboard.vercel.app/login)
+
+### ⚙️ Backend API
+[View MediCare Backend](https://doctorsappointment-25zr.onrender.com)
 ## Doctor Appointment Booking App
 
 A full-stack web application that allows patients to book appointments with doctors seamlessly. Built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js), this project demonstrates the power of modern web technologies in solving real-world problems like healthcare scheduling.
